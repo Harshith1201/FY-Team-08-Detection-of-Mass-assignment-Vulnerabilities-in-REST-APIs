@@ -4,11 +4,11 @@ A command-line tool for detecting mass assignment vulnerabilities in Spring Boot
 
 ## Features
 
-- 🔍 **AST-Based Analysis** - Detects vulnerability patterns in Java code
-- 📊 **Multiple Output Formats** - Console, JSON, and text reports
-- 🚀 **Fast Scanning** - Recursively scan entire projects
-- ⚡ **CI/CD Ready** - Exit codes for build pipeline integration
-- 🎯 **Severity Levels** - HIGH, MEDIUM, and LOW risk classification
+-  **AST-Based Analysis** - Detects vulnerability patterns in Java code
+-  **Multiple Output Formats** - Console, JSON, and text reports
+-  **Fast Scanning** - Recursively scan entire projects
+-  **CI/CD Ready** - Exit codes for build pipeline integration
+-  **Severity Levels** - HIGH, MEDIUM, and LOW risk classification
 
 ## Installation
 
