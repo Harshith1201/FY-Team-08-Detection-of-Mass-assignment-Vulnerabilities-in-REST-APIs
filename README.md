@@ -4,11 +4,14 @@ A command-line tool for detecting mass assignment vulnerabilities in Spring Boot
 
 ## Features
 
--  **AST-Based Analysis** - Detects vulnerability patterns in Java code
--  **Multiple Output Formats** - Console, JSON, and text reports
--  **Fast Scanning** - Recursively scan entire projects
--  **CI/CD Ready** - Exit codes for build pipeline integration
--  **Severity Levels** - HIGH, MEDIUM, and LOW risk classification
+- 🔍 **AST-Based Analysis** - Uses java-parser for accurate Abstract Syntax Tree parsing
+- 🎯 **10 Vulnerability Types** - Detects mass assignment vulnerabilities with CWE classifications
+- 📊 **Multiple Output Formats** - Console, JSON, and text reports
+- 🌐 **GitHub Repository Scanning** - Scan any public GitHub repository automatically
+- 🚀 **Fast Scanning** - Recursively scan entire projects
+- ⚡ **CI/CD Ready** - Exit codes for build pipeline integration
+- 📝 **Detailed Recommendations** - Actionable fix instructions for each vulnerability
+- 🔄 **Smart Fallback** - Automatic fallback to regex-based detection if AST parsing fails
 
 ## Installation
 

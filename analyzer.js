@@ -1,6 +1,12 @@
 /**
- * Enhanced vulnerability detection logic with better pattern matching
+ * Enhanced vulnerability detection logic with AST-based analysis and regex fallback
  */
+
+const {
+    checkLombokAnnotationsAST,
+    checkEntityExposureAST,
+    checkControllerBindingsAST
+} = require('./ast-detectors');
 
 function detectVulnerabilities(code, filename = '') {
     const vulnerabilities = [];
@@ -17,22 +23,33 @@ function detectVulnerabilities(code, filename = '') {
 
 /**
  * Analyze Java files with comprehensive checks
+ * Uses AST-based analysis with regex fallback
  */
 function analyzeJavaFile(code, filename) {
     const vulnerabilities = [];
 
-    // Check for class-level issues
-    vulnerabilities.push(...checkLombokAnnotations(code, filename));
-    vulnerabilities.push(...checkEntityExposure(code, filename));
+    // Try AST-based detection first
+    const astLombokResults = checkLombokAnnotationsAST(code, filename);
+    const astEntityResults = checkEntityExposureAST(code, filename);
+    const astControllerResults = checkControllerBindingsAST(code, filename);
 
-    // Check for controller issues
-    vulnerabilities.push(...checkControllerBindings(code, filename));
-    vulnerabilities.push(...checkValidationAnnotations(code, filename));
+    // If AST parsing succeeded (returned results), use AST results
+    // Otherwise fall back to regex-based detection
+    if (astLombokResults.length > 0 || astEntityResults.length > 0 || astControllerResults.length > 0) {
+        // AST-based detection succeeded
+        vulnerabilities.push(...astLombokResults);
+        vulnerabilities.push(...astEntityResults);
+        vulnerabilities.push(...astControllerResults);
+    } else {
+        // Fall back to regex-based detection
+        vulnerabilities.push(...checkLombokAnnotations(code, filename));
+        vulnerabilities.push(...checkEntityExposure(code, filename));
+        vulnerabilities.push(...checkControllerBindings(code, filename));
+        vulnerabilities.push(...checkValidationAnnotations(code, filename));
+    }
 
-    // Check for JPA/Hibernate issues
+    // Always run these checks (not yet implemented in AST)
     vulnerabilities.push(...checkJpaRelationships(code, filename));
-
-    // Check for setter methods on sensitive fields
     vulnerabilities.push(...checkSensitiveFieldSetters(code, filename));
 
     return vulnerabilities;
@@ -150,7 +167,7 @@ function checkControllerBindings(code, filename) {
     const lines = code.split('\n');
 
     let isController = false;
-    lines.forEach((line, idx) => {
+    lines.forEach((line) => {
         if (line.includes('@RestController') || line.includes('@Controller')) {
             isController = true;
         }
