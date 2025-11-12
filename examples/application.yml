@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: demo-app
+  
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false  # VULNERABLE: Allows mass assignment
+    
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydb
+    username: user
+    password: pass
+
