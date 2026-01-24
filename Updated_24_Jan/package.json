@@ -1,0 +1,32 @@
+{
+  "name": "springsecure-cli",
+  "version": "1.0.0",
+  "description": "CLI tool for detecting mass assignment vulnerabilities in Spring Boot applications",
+  "main": "index.js",
+  "bin": {
+    "springsecure": "./cli.js"
+  },
+  "scripts": {
+    "start": "node cli.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "security",
+    "spring-boot",
+    "mass-assignment",
+    "vulnerability",
+    "static-analysis"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0",
+    "glob": "^10.3.10",
+    "java-parser": "^0.3.2",
+    "lodash": "^4.17.23",
+    "simple-git": "^3.21.0",
+    "yaml": "^2.3.4"
+  }
+}
